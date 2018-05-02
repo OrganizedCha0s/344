@@ -969,23 +969,22 @@ SELECT * FROM studoc;
 
 --Insert statements for Military Branch table
 INSERT INTO brn
-	VALUES(?, 'Navy');
+	VALUES(001,2004, 'Navy');
 
 INSERT INTO brn
-	VALUES(?, 'Air Force');
+	VALUES(002,2004, 'Air Force');
 
 INSERT INTO brn
-	VALUES(?, 'Coast Guard');
+	VALUES(003,2005, 'Coast Guard');
 
 INSERT INTO brn
-	VALUES(?, 'Army');
+	VALUES(004,2006, 'Army');
 
 INSERT INTO brn
-	VALUES(?, 'Marine Corps');
+	VALUES(005,2006, 'Marine Corps');
 
 INSERT INTO brn
-	VALUES(?, 'Air Force');
-
+	VALUES(006,2005, 'Air Force');
 
 --INSERT statements for Ethnicity table
 
@@ -1007,42 +1006,42 @@ INSERT INTO eth
 
 --Insert statements for Parent/Guardian Consent table
 INSERT INTO parguar
-	VALUES(?, Yes, ?);
+	VALUES(2001, Yes, 1000);
 
 INSERT INTO parguar
-	VALUES(?, No, ?);
+	VALUES(2002, Yes, 1001);
 
 INSERT INTO parguar
-	VALUES(?, Yes, ?);
+	VALUES(2003, Yes, 1002);
 
 INSERT INTO parguar
-	VALUES(?, Yes, ?);
+	VALUES(2004, Yes, 1003);
 
 INSERT INTO parguar
-	VALUES(?, No, ?);
+	VALUES(2005, No, 1004);
 
 INSERT INTO parguar
-	VALUES(?, Yes, ?);
+	VALUES(2006, Yes, 1005);
 
 
 --Insert statements for Special Instructions table
 INSERT INTO specinst
-	VALUES(?, 1400204019, 'Celexa', 2, 'Take 2 pills by mouth', TO_DATE('16:45', 'HH24:MI'), 'Depression');
+	VALUES(2001, 1400204019, 'Celexa', 2, 'Take 2 pills by mouth', TO_DATE('16:45', 'HH24:MI'), 'Depression');
 
 INSERT INTO specinst
-	VALUES(?, 1230989048, 'Xanax',  3, 'Take 3 pills by mouth', TO_DATE('10:00', 'HH24:MI'), 'Anxiety');
+	VALUES(2001, 1230989048, 'Xanax',  3, 'Take 3 pills by mouth', TO_DATE('10:00', 'HH24:MI'), 'Anxiety');
 
 INSERT INTO specinst
-	VALUES(?, 3593049013, 'Flovent', 2, 'Inhale two puffs', TO_DATE('14:00', 'HH24:MI'), 'Asthma');
+	VALUES(2002, 3593049013, 'Flovent', 2, 'Inhale two puffs', TO_DATE('14:00', 'HH24:MI'), 'Asthma');
 
 INSERT INTO specinst
-	VALUES(?, 5010584920, 'Humulin', 1, 'Inject one amount', TO_DATE('12:00', 'HH24:MI'), 'Diabetes');
+	VALUES(2002, 5010584920, 'Humulin', 1, 'Inject one amount', TO_DATE('12:00', 'HH24:MI'), 'Diabetes');
 
 INSERT INTO specinst
-	VALUES(?, 8923498981, 'Oflaxin', 3, 'Put two drops into ear', TO_DATE('9:00', 'HH24:MI'), 'Ear Infection');
+	VALUES(2003, 8923498981, 'Oflaxin', 3, 'Put two drops into ear', TO_DATE('9:00', 'HH24:MI'), 'Ear Infection');
 
 INSERT INTO specinst
-	VALUES(?, 2406920194, 'Aldactone', 2, 'Take 2 pills by mouth', TO_DATE('15:00', 'HH24:MI'), 'Heart Disease');
+	VALUES(2003, 2406920194, 'Aldactone', 2, 'Take 2 pills by mouth', TO_DATE('15:00', 'HH24:MI'), 'Heart Disease');
 									       
 SELECT * FROM specinst;	
 									       
@@ -1068,40 +1067,28 @@ INSERT INTO med
 SELECT * FROM med;	
 --Insert statement for Student Ethnicity table
 INSERT INTO stueth
-	VALUES(1890345438, ?);
+	VALUES(1890345438, 2001);
 
 INSERT INTO stueth
-	VALUES(1890345438, ?);
+	VALUES(1890345438, 2002);
 
 INSERT INTO stueth
-	VALUES(1890345438, ?);
+	VALUES(1890345438, 2003);
 
 INSERT INTO stueth
-	VALUES(1890345438, ?);
+	VALUES(1890345438, 2004);
 
 INSERT INTO stueth
-	VALUES(3940219345, ?);
+	VALUES(3940219345, 2005);
 
 INSERT INTO stueth
-	VALUES(6294014931, ?);
+	VALUES(6294014931, 2001);
 
 INSERT INTO stueth
-	VALUES(6294014931, ?);
+	VALUES(1239808547, 2002);
 
 INSERT INTO stueth
-	VALUES(1239808547, ?);
-
-INSERT INTO stueth
-	VALUES(1239808547, ?); 
-
-INSERT INTO stueth
-	VALUES(1239808547, ?);
-
-INSERT INTO stueth
-	VALUES(8392019403, ?);
-
-INSERT INTO stueth
-	VALUES(8392019403, ?);
+	VALUES(8392019403, 2003);
 
 SELECT * FROM stueth;	  
 	       
