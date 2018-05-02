@@ -1023,7 +1023,6 @@ INSERT INTO parguar
 INSERT INTO parguar
 	VALUES(2006, Yes, 1005);
 
-
 --Insert statements for Special Instructions table
 INSERT INTO specinst
 	VALUES(2001, 1400204019, 'Celexa', 2, 'Take 2 pills by mouth', TO_DATE('16:45', 'HH24:MI'), 'Depression');
