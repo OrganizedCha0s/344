@@ -689,3 +689,158 @@ INSERT INTO att
 	VALUES (2006, 22-NOV-2018, 01-NOV-2016, 23-NOV-2017);						   
 
 SELECT * FROM att;  
+
+
+/* Script to populate the organization table */
+
+INSERT INTO org 
+	VALUES (1001, 'Mason Companies, Inc');
+
+INSERT INTO org 
+	VALUES (1002, 'Landmark Company');
+
+INSERT INTO org 
+	VALUES (1003, 'Securian Financial Group');
+
+INSERT INTO org 
+	VALUES (1004, 'Chippewa Valley Hospital');
+
+INSERT INTO org 
+	VALUES (1005, 'Menards');
+
+INSERT INTO org 
+	VALUES (1006, 'Target Corporation');
+
+INSERT INTO org 
+	VALUES (1007, 'Curt Manufacturing LLC');
+
+INSERT INTO org 
+	VALUES (1008, 'Mayo Clinic Health System');
+
+INSERT INTO org 
+	VALUES (1009, 'Sacred Heart Hospital');
+
+INSERT INTO org 
+	VALUES (1010, 'HSHS St. Joseph's Hospital');
+
+
+
+-- Script to populate place of employment table 
+
+INSERT INTO plofemp 
+	VALUES (?, '1001'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1002'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1003'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1004'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1004'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1005'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1006'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1007'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1008'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1009'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1009'); 
+
+INSERT INTO plofemp 
+	VALUES (?, '1010);
+
+SELECT * FROM plofemp;
+/* Script to populate the Hospital table */
+
+INSERT INTO hos 
+	VALUES (?, 1004, 'P', 7156724211);
+
+INSERT INTO hos 
+	VALUES (?, 1004, 'P', 7156724211);
+
+INSERT INTO hos 
+	VALUES (?, 1008, 'P', 7158385222);
+
+INSERT INTO hos 
+	VALUES (?, 1009, 'P', 7157174121);
+
+INSERT INTO hos 
+	VALUES (?, 1010, 'P', 7157231811);
+
+INSERT INTO hos 
+	VALUES (?, 1009, 'P', 7157174121);
+
+INSERT INTO hos 
+	VALUES (?, 1008, 'S', 7158385222); --do we even need secondary? members only list one preffered hospital
+
+INSERT INTO hos 
+	VALUES (?, 1010, 'S', 7157231811);
+
+SELECT * FROM hos;
+
+/* Script to populate Special Services Table */ 
+
+INSERT INTO specserv 
+	VALUES (2100, 'Speech');
+
+INSERT INTO specserv 
+	VALUES (2101, 'English Language Learner');
+
+INSERT INTO specserv 
+	VALUES (2102, 'Title I');
+
+INSERT INTO specserv 
+	VALUES (2103, 'Cognitive disability');
+
+INSERT INTO specserv 
+	VALUES (2104, 'Learning Disability');
+
+INSERT INTO specserv 
+	VALUES (2105, 'Emotional/behavioral disability');
+
+SELECT * FROM specserv;
+
+/* Script to populate Student Special Services Table */
+
+INSERT INTO stuserv 
+	VALUES (?, 2100); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2101); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2104); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2102); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2103); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2105); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2104); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2102); 
+
+INSERT INTO stuserv 
+	VALUES (?, 2102); 
+	
+SELECT * FROM stuserv;	
