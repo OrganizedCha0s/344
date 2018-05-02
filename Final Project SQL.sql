@@ -188,16 +188,15 @@ CONSTRAINT stuserv_servID_fk FOREIGN KEY (servID) REFERENCES specserv (servID));
 
 --INCOME TABLE 
 
-CREATE TABLE inc (
-	perID 		NUMBER (10),  
-	incfamsi 	NUMBER (10) NOT NULL,  --FAMILY SIZE
-	incinc 		NUMBER (10) NOT NULL, --   FAMILY INCOME
-	lunch		CHAR (1), -- FREE AND REDUCED LUNCH (Y/N)
-	incmili 	CHAR (1) NOT NULL,  --MILITARY STATUS (Y/N)
-  
-CONSTRAINT inc_pk PRIMARY KEY(perID),
-CONSTRAINT inc_perID_fk FOREIGN KEY (perID) REFERENCES per(perID),
-CONSTRAINT lunch_cc CHECK ((lunch = 'Y') OR (lunch = 'N')),  
+INCOME TABLE CREATE TABLE inc ( 
+perID NUMBER (10), 
+incfamsi NUMBER (10) NOT NULL, --FAMILY SIZE 
+incinc NUMBER (10) NOT NULL, -- FAMILY INCOME 
+lunch CHAR (1), -- FREE AND REDUCED LUNCH (Y/N) 
+incmili CHAR (1) NOT NULL, --MILITARY STATUS (Y/N) 
+CONSTRAINT inc_pk PRIMARY KEY(perID), 
+CONSTRAINT inc_perID_fk FOREIGN KEY (perID) REFERENCES per(perID), 
+CONSTRAINT lunch_cc CHECK ((lunch = 'Y') OR (lunch = 'N')), 
 CONSTRAINT incmili_cc CHECK ((incmili = 'Y') OR (incmili = 'N')));
   
   
@@ -859,3 +858,8 @@ INSERT INTO stuserv
 	VALUES (2001, 2102); 
 
 SELECT * FROM stuserv;	
+
+
+
+
+
