@@ -43,14 +43,15 @@ CREATE TABLE per (
 CONSTRAINT per_perID_pk PRIMARY KEY(perID));
   
 --DEMOGRAPHIC TABLE 
- 
-CREATE TABLE dem (
-	stuID 		NUMBER (10),
-	demgen 		CHAR (1) NOT NULL, 
-	demdob  	DATE NOT NULL, 
 
-CONSTRAINT dem_stuID_pk PRIMARY KEY (stuID),
-CONSTRAINT dem_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID));
+CREATE TABLE dem ( 
+stuID NUMBER (10), 
+demgen CHAR (1) NOT NULL, ---Male of Female 
+demdob DATE NOT NULL, 
+CONSTRAINT dem_stuID_pk PRIMARY KEY (stuID), 
+CONSTRAINT dem_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID), 
+CONSTRAINT dem_cc CHECK ((demgen = 'M') OR (demgen = 'F')) ); --DEMOGRAPHIC 
+
 
 --EMAIL TABLE 
 
