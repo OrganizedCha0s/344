@@ -45,26 +45,25 @@ CREATE TABLE per (
 CONSTRAINT per_perID_pk PRIMARY KEY(perID));
   
 --DEMOGRAPHIC TABLE 
+CREATE TABLE dem (
+	stuID 		NUMBER (10),
+	demgen 		CHAR (1) NOT NULL, 
+	demdob  	DATE NOT NULL, 
 
-CREATE TABLE dem ( 
-stuID NUMBER (10), 
-demgen CHAR (1) NOT NULL, ---Male of Female 
-demdob DATE NOT NULL, 
-CONSTRAINT dem_stuID_pk PRIMARY KEY (stuID), 
-CONSTRAINT dem_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID), 
-CONSTRAINT dem_cc CHECK ((demgen = 'M') OR (demgen = 'F')) ); --DEMOGRAPHIC 
-
+CONSTRAINT dem_stuID_pk PRIMARY KEY (stuID),
+CONSTRAINT dem_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT dem_cc CHECK ((demgen = 'M') OR (demgen = 'F')));
 
 --EMAIL TABLE 
 
-CREATE TABLE email ( 
-emailID NUMBER (10), 
-perID NUMBER (10), 
-emailus VARCHAR2 (35) NOT NULL, 
-emaildom VARCHAR2 (35)NOT NULL,
-	
-CONSTRAINT email_emailID_pk PRIMARY KEY (emailID, perID), 
-CONSTRAINT perID_fk FOREIGN KEY (perID) REFERENCES per (perID)); 
+CREATE TABLE email (
+	emailID 	NUMBER (10),
+	perID 		Number (10),
+	emailus 	VARCHAR2 (35) NOT NULL,
+	emaildom 	VARCHAR2 (35)NOT NULL,
+  
+CONSTRAINT email_emailID_pk PRIMARY KEY (emailID, perID),
+CONSTRAINT perID_fk FOREIGN KEY (perID) REFERENCES per (perID));
 
 -- ORGANIZATION TABLE 
                                                                 
@@ -240,13 +239,12 @@ CONSTRAINT peraddr_addrID_fk FOREIGN KEY (addrID) REFERENCES addr (addrID),
 CONSTRAINT addtype_cc CHECK ((addtype = 'P') OR (addtype = 'S'))); 
 
 --MILITARY BRANCH TABLE
-
-
 CREATE TABLE brn (
+  	milID     NUMBER (10),
 	perID 		NUMBER (10),
 	brnname 	VARCHAR2(35) NOT NULL,
   
-CONSTRAINT brn_perID_pk PRIMARY KEY (perID), 
+CONSTRAINT brn_perID_pk PRIMARY KEY (milID ,perID), 
 CONSTRAINT brn_perID_fk FOREIGN KEY (perID) REFERENCES per (perID)); 
  
 
@@ -268,20 +266,8 @@ CREATE TABLE socdev (
 
 CONSTRAINT socdev_socdevID_pk PRIMARY KEY (socdevID));
 
-
---PROBLEM TABLE
-
-CREATE TABLE pro (
-	socdevID	NUMBER (10),
-	stuID 		NUMBER (10)  NOT NULL,
-	prospec 	VARCHAR2 (35) NOT NULL, 
-	probdate 	DATE NOT NULL, 
-  
-CONSTRAINT pro_pk PRIMARY KEY (socdevID),
-CONSTRAINT pro_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
-CONSTRAINT pro_socdevID_fk FOREIGN KEY (socdevID) REFERENCES socdev (socdevID));
-  
 --MEMBERSHIP RELEASE FORM TABLE
+
 CREATE TABLE mr (
   relid     NUMBER (10),
 	stuID 		NUMBER (10),
@@ -295,7 +281,7 @@ CREATE TABLE mr (
 	mrmemsig 	CHAR (1) NOT NULL, -- MEMBER SIGNATURE Y/N
 	mrparsig 	CHAR (1) NOT NULL, --PARENT SIGNATURE Y/N
 	mrelect 	CHAR (1) NOT NULL, -- ELECTRONICS Y/N
-  	medindate 	DATE, -- DATE OF LAST VISIT
+  medindate 	DATE, -- DATE OF LAST VISIT
 	medimupda 	CHAR (1), --IMMUNIZATION UPDATE (Y/N) 
 	medcouns  	CHAR (1), --COUNSELING (Y/N)
   
@@ -332,13 +318,24 @@ CREATE TABLE apprec (
 	oriti 		DATE NOT NULL, --ORIENTATION TIME
 	oricom 		CHAR (1) NOT NULL, --ORIENTATION COMPLETE (Y/N)
 
-CONSTRAINT apprec_pk PRIMARY KEY (appID, empID, stuID), 
+CONSTRAINT apprec_pk PRIMARY KEY (appID), 
 CONSTRAINT apprecd_empID_fk FOREIGN KEY (empID) REFERENCES per (perID), 
 CONSTRAINT apprec_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID), 
 CONSTRAINT memstat_cc CHECK ((memstat = 'Guest') OR (memstat = 'New') OR (memstat = 'Renew')), 
 CONSTRAINT oricom_cc CHECK ((oricom = 'Y') OR (oricom = 'N')));
 
-                                                               
+--PROBLEM TABLE
+
+CREATE TABLE pro (
+	socdevID	NUMBER (10),
+	stuID 		NUMBER (10)  NOT NULL,
+	prospec 	VARCHAR2 (35) NOT NULL, 
+	probdate 	DATE NOT NULL, 
+  
+CONSTRAINT pro_pk PRIMARY KEY (socdevID),
+CONSTRAINT pro_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT pro_socdevID_fk FOREIGN KEY (socdevID) REFERENCES socdev (socdevID));
+                                                                 
                                                                 
 --ATTENDANCE TABLE 
 
@@ -405,68 +402,98 @@ CONSTRAINT sign_cc CHECK ((sign = 'Y') OR (sign = 'N')));
 					   
 --INSERT STATEMENTS
 --PERSON
-INSERT INTO pers 
-  VALUES (5001, 'Noah', 'Wetzel','James');
+INSERT INTO per
+  VALUES (1000, 'Noah', 'Wetzel','James');
   
-INSERT INTO pers
-  VALUES (5002, 'Jordan', 'Jansen','Fredrick'); 
+INSERT INTO per
+  VALUES (1001, 'Jordan', 'Jansen','Fredrick'); 
   
-INSERT INTO pers 
-  VALUES (5003, 'Ian', 'Wetzel','Charles');
+INSERT INTO per
+  VALUES (1002, 'Ian', 'Wetzel','Charles');
   
-INSERT INTO pers 
-  VALUES (5004, 'Justin', 'Lorentz','Allen');  
+INSERT INTO per
+  VALUES (1003, 'Justin', 'Lorentz','Allen');  
   
-INSERT INTO pers 
-  VALUES (5005, 'Rachel', 'Stout','Marie');
+INSERT INTO per
+  VALUES (1004, 'Rachel', 'Stout','Marie');
   
-INSERT INTO pers 
-  VALUES (5006, 'Erin', 'Wetzel','Charlene');
+INSERT INTO per
+  VALUES (1005, 'Erin', 'Wetzel','Charlene');
 
-INSERT INTO pers 
-  VALUES (5007, 'Sunny', '', 'Chen');
+INSERT INTO per
+  VALUES (1006, 'Sunny', '', 'Chen');
   
-INSERT INTO pers 
-  VALUES (5008, 'Jacob', 'Maurer','Peter');
+INSERT INTO per
+  VALUES (1007, 'Jacob', 'Maurer','Peter');
 
-INSERT INTO pers 
-  VALUES (5009, 'Yong Sheng', '', 'Lai');
+INSERT INTO per
+  VALUES (1008, 'Yong Sheng', '', 'Lai');
 
-INSERT INTO pers 
-  VALUES (5010, 'Mark', 'Smith', 'Brewer');
+INSERT INTO per
+  VALUES (1009, 'Mark', 'Smith', 'Brewer');
 
-INSERT INTO pers 
-  VALUES (5011, 'Sarah', 'Adam', 'Lee');
+INSERT INTO per
+  VALUES (1010, 'Sarah', 'Adam', 'Lee');
 
-INSERT INTO pers 
-  VALUES (5012, 'Patricia', 'Jacobsen' ,'Pweter');
+INSERT INTO per
+  VALUES (1011, 'William', 'Salmon', 'Smith');  
 
-INSERT INTO pers 
-  VALUES (5013, 'Adam', 'Martin' ,'Jake');
+INSERT INTO per
+  VALUES (1012, 'John', 'Alex', 'Denner'); 
 
-INSERT INTO pers 
-  VALUES (5014, 'Eli', '','Behling');
-
-INSERT INTO pers 
-  VALUES (5015, 'Sam', 'Paul','Smith');
-
-INSERT INTO pers 
-  VALUES (5016, 'Sandy', '','Wong');
+INSERT INTO per
+  VALUES (2001, 'Sam', 'Kaur', 'Perdeep');
   
-INSERT INTO pers 
-  VALUES (5017, 'John', 'Jacobs','James');
+INSERT INTO per
+  VALUES (2002, 'Hunter', 'Rose', 'Bronco');
   
-INSERT INTO pers 
-  VALUES (5018, 'Adam', 'Seth','Johnson');
-  
-INSERT INTO pers 
-  VALUES (5019, 'Sam', 'David','Heath');
-  
-INSERT INTO pers 
-  VALUES (5020, 'Samantha', 'Erin','Dunbar');
+INSERT INTO per
+  VALUES (2003, 'Adam', 'Ghosh', 'Clark');
 
-INSERT INTO pers 
-  VALUES (5021, 'Eli', '','Manning');
+INSERT INTO per
+  VALUES (2004, 'Klein', 'Quinn', 'Lopez');
+  
+INSERT INTO per
+  VALUES (2005, 'Alex', 'Smith', 'Clark');
+
+INSERT INTO per
+  VALUES (2006, 'Joyce', '', 'Reily');
+  
+INSERT INTO per
+  VALUES (3001, 'Timmy', 'Mufasa', 'Rafiki');
+  
+INSERT INTO per
+  VALUES (3002, 'James', 'William', 'David');
+  
+INSERT INTO per
+  VALUES (3003, 'Johnson', 'Maria', 'David');
+  
+INSERT INTO per
+  VALUES (3004, 'Taylor', '', 'Swift');
+  
+INSERT INTO per
+  VALUES (3005, 'Clark', '', 'Lee');
+
+INSERT INTO per
+  VALUES (3006, 'Samuel', 'Charles', 'David');
+  
+INSERT INTO per
+  VALUES (4001, 'Mary', '', 'Elizabeth');
+  
+INSERT INTO per
+  VALUES (4002, 'Nancy', 'Catherine', 'Ann');
+
+INSERT INTO per
+  VALUES (4003, 'Thomas', 'Joseph', 'Yellow');
+
+INSERT INTO per
+  VALUES (4004, 'Daniel', 'Samuel', 'Williams');
+  
+INSERT INTO per
+  VALUES (4005, 'James', '', 'George');
+  
+INSERT INTO per
+  VALUES (4006, 'Henry', 'Charles', 'Lee');
   
 SELECT * FROM pers;
 
@@ -619,26 +646,45 @@ INSERT INTO stu
 SELECT * FROM stu;	
 
 --INSERT EMERGENCY CONTACT
-INSERT INTO emg
-	VALUES (1010, 5001, 'Brother', 'Y', 'Y', 'N');
 
 INSERT INTO emg
-	VALUES (1011, 5002, Friend, 'N', 'Y', 'N');
+	VALUES (1000, 2000, 'Father', 'Y', 'Y');
 
 INSERT INTO emg
-	VALUES (1012, 5003, Colleague, 'Y', 'N', 'Y');
+	VALUES (1001, 2001, 'Brother', 'N', 'Y');
 
 INSERT INTO emg
-	VALUES (1013, 5004, Cousin, 'Y', 'Y', 'N');
+	VALUES (1002, 2002, 'Father', 'Y', 'N');
 
 INSERT INTO emg
-	VALUES (1014, 5005, Sister, 'Y', 'N', 'Y');
+	VALUES (1003, 2003, 'Brother', 'Y', 'Y');
 
 INSERT INTO emg
-	VALUES (1015, 5006, Brother, 'N', 'N', 'Y');
+	VALUES (1004, 2004, 'Mother', 'Y', 'N');
 
 INSERT INTO emg
-	VALUES (1016, 5007, Wife, 'Y', 'Y', 'N');
+	VALUES (1005, 2005, 'Sister', 'N', 'N');
+
+INSERT INTO emg
+	VALUES (1006, 2006, 'Mother', 'Y', 'Y');
+	
+INSERT INTO emg
+	VALUES (1007, 2001, 'Brother', 'Y', 'Y');
+  
+INSERT INTO emg
+	VALUES (1008, 2002, 'Cousin', 'Y', 'N');
+  
+INSERT INTO emg
+	VALUES (1009, 2003, 'Brother', 'Y', 'N');
+
+INSERT INTO emg
+	VALUES (1010, 2004, 'Sister', 'Y', 'N');
+  
+INSERT INTO emg
+	VALUES (1011, 2005, 'Brother', 'Y', 'N');
+  
+INSERT INTO emg
+	VALUES (1012, 2006, 'Father', 'Y', 'N');
 
 SELECT * FROM emg
 
@@ -780,55 +826,34 @@ INSERT INTO plofemp
 
 INSERT INTO plofemp 
 	VALUES (3005, 1010);
-	
-INSERT INTO plofemp 
-	VALUES (?, 1011);
-
-INSERT INTO plofemp 
-	VALUES (?, 1012);
-
-INSERT INTO plofemp 
-	VALUES (?, 1013);
-
-INSERT INTO plofemp 
-	VALUES (?, 1014);
-
-INSERT INTO plofemp 
-	VALUES (?, 1015);
-
-INSERT INTO plofemp 
-	VALUES (?, 1016);
-
-INSERT INTO plofemp 
-	VALUES (?, 1017);	
-
+		
 SELECT * FROM plofemp;
 
 --Script to populate the Hospital table
 
 INSERT INTO hos 
-	VALUES (2001, 1004, 'P', 7156724211);
+	VALUES (2001, 1004, 7156724211);
 
 INSERT INTO hos 
-	VALUES (2002, 1004, 'P', 7156724211);
+	VALUES (2002, 1004,7156724211);
 
 INSERT INTO hos 
-	VALUES (2003, 1008, 'P', 7158385222);
+	VALUES (2003, 1008, 7158385222);
 
 INSERT INTO hos 
-	VALUES (2004, 1009, 'P', 7157174121);
+	VALUES (2004, 1009, 7157174121);
 
 INSERT INTO hos 
-	VALUES (2005, 1010, 'P', 7157231811);
+	VALUES (2005, 1010, 7157231811);
 
 INSERT INTO hos 
-	VALUES (2006, 1009, 'P', 7157174121);
+	VALUES (2006, 1009, 7157174121);
 
 INSERT INTO hos 
-	VALUES (2001, 1008, 'S', 7158385222); --do we even need secondary? members only list one preffered hospital
-
+	VALUES (2001, 1008, 7158385222); 
+	
 INSERT INTO hos 
-	VALUES (2002, 1010, 'S', 7157231811);
+	VALUES (2002, 1010, 7157231811);
 
 SELECT * FROM hos;
 
@@ -923,6 +948,7 @@ INSERT INTO peraddr
 	VALUES (2006, 5016, 'S'); 
 	
 SELECT * FROM peraddr;
+
 ---Inserts for Student Doctor Table 
 INSERT INTO studoc
 	VALUES (2001, 3001); 
@@ -1079,4 +1105,99 @@ INSERT INTO stueth
 
 SELECT * FROM stueth;	  
 	       
-	       
+INSERT INTO apprec
+  VALUES (6701, 4001, 2001, 'Guest', 'Paid', 1500, TO_DATE('2/10/2018','MM/DD/YYYY'), TO_DATE('2/12/2018','MM/DD/YYYY'), TO_DATE('3/05/2018','MM/DD/YYYY'),TO_DATE('08:00','HH24:MI'), 'Y');
+  
+INSERT INTO apprec
+  VALUES (6702, 4002, 2002, 'New', 'Cash', 4000, TO_DATE('1/01/2018','MM/DD/YYYY'), TO_DATE('1/03/2018','MM/DD/YYYY'), TO_DATE('2/01/2018','MM/DD/YYYY'),TO_DATE('09:00','HH24:MI'), 'N');
+
+INSERT INTO apprec
+  VALUES (6703, 4003, 2002, 'Renew', 'Check', 7500, TO_DATE('3/15/2018','MM/DD/YYYY'), TO_DATE('3/18/2018','MM/DD/YYYY'), TO_DATE('3/15/2018','MM/DD/YYYY'),TO_DATE('08:30','HH24:MI'), 'Y');
+
+INSERT INTO apprec
+  VALUES (6704, 4004, 2003, 'Guest', 'Paid', 590, TO_DATE('1/03/2018','MM/DD/YYYY'), TO_DATE('1/10/2018','MM/DD/YYYY'), TO_DATE('2/07/2018','MM/DD/YYYY'),TO_DATE('09:45','HH24:MI'), 'N');
+
+INSERT INTO apprec
+  VALUES (6705, 4005, 2004, 'Renew', 'Scholarship', 6000, TO_DATE('4/18/2018','MM/DD/YYYY'), TO_DATE('4/24/2018','MM/DD/YYYY'), TO_DATE('5/04/2018','MM/DD/YYYY'),TO_DATE('10:00','HH24:MI'), 'Y');
+
+INSERT INTO apprec
+  VALUES (6706, 4006, 2005, 'New', 'Cash', 350, TO_DATE('2/23/2018','MM/DD/YYYY'), TO_DATE('2/24/2018','MM/DD/YYYY'), TO_DATE('3/01/2018','MM/DD/YYYY'),TO_DATE('09:15','HH24:MI'), 'N');
+  
+  INSERT INTO mr 
+  VALUES (2001, TO_DATE('1/04/2018','MM/DD/YYYY'), 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y','Y','Y');
+
+INSERT INTO mr 
+  VALUES (2002, TO_DATE('2/06/2018','MM/DD/YYYY'), 'Y', 'N', 'Y', 'Y', 'Y', 'Y', 'Y','N','N');
+
+INSERT INTO mr 
+  VALUES (2003, TO_DATE('1/17/2018','MM/DD/YYYY'), 'N', 'Y', 'Y', 'N', 'Y', 'Y', 'N','Y','Y');
+  
+INSERT INTO mr 
+  VALUES (2004, TO_DATE('2/18/2018','MM/DD/YYYY'), 'Y', 'Y', 'N', 'Y', 'N', 'Y', 'Y','Y','Y');
+  
+INSERT INTO mr 
+  VALUES (2005, TO_DATE('3/10/2018','MM/DD/YYYY'), 'N', 'Y', 'Y', 'Y', 'Y', 'N', 'Y','N','Y');
+
+INSERT INTO mr 
+  VALUES (2006, TO_DATE('3/20/2018','MM/DD/YYYY'), 'Y', 'Y', 'N', 'N', 'N', 'N', 'Y','Y','Y');
+  
+--INSERT SOCIAL DEVELOPMENT TABLE
+--Q: SOCIAL DEVELOPMENT NAME MEANS??
+INSERT INTO socdev
+  VALUES (52001, 'Improving');
+
+INSERT INTO socdev
+  VALUES (52002, 'Not Improving');
+
+INSERT INTO socdev
+  VALUES (52003, 'Improving');
+  
+INSERT INTO socdev
+  VALUES (52004, 'Improving');
+  
+INSERT INTO socdev
+  VALUES (52005, 'Improving');
+  
+INSERT INTO socdev
+  VALUES (52006, 'Not Improving');
+  
+ --INSERT PROBLEM TABLE
+ --Q: PROBLEM SPECIFICATIONS??
+ INSERT INTO pro
+  VALUES (52001, 2001, 'Missing classes', TO_DATE('1/05/2018','MM/DD/YYYY'));
+
+ INSERT INTO pro
+  VALUES (52002, 2002, 'Teen pregnancy', TO_DATE('2/11/2018','MM/DD/YYYY'));
+  
+ INSERT INTO pro
+  VALUES (52003, 2003, 'Drug abuse', TO_DATE('1/24/2018','MM/DD/YYYY'));
+
+ INSERT INTO pro
+  VALUES (52004, 2004, 'Bullying classmates', TO_DATE('2/05/2018','MM/DD/YYYY'));
+  
+ INSERT INTO pro
+  VALUES (52005, 2005, 'Violent behaviors', TO_DATE('3/13/2018','MM/DD/YYYY'));
+  
+ INSERT INTO pro
+  VALUES (52006, 2006, 'Racist slurs', TO_DATE('4/18/2018','MM/DD/YYYY'));
+  
+--Medical Condition
+
+INSERT INTO medcond
+  VALUES (431, 2001, 'Anxiety');
+
+INSERT INTO medcond
+  VALUES (432, 2001, 'Depression');
+  
+INSERT INTO medcond
+  VALUES (433, 2002, 'Asthma');
+
+INSERT INTO medcond
+  VALUES (434, 2002, 'Diabetes');
+  
+INSERT INTO medcond
+  VALUES (435, 2003, 'Ear infection');
+  
+INSERT INTO medcond
+  VALUES (436, 2003, 'Heart diesease');
+
