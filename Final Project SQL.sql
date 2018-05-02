@@ -586,34 +586,22 @@ SELECT * FROM addr
   
 --STUDENT (stuID,stuorgID, student year inschool jun sen, student lunch y/n, student retained, stu grade comments, stu grades sat?, stu homework,stuservID)
 INSERT INTO stu
-  VALUES (2001, 6001, 'Junior', 'Y', 'N', ' ', 'Y', 'Math', 7001);
-  
-INSERT INTO stu
-  VALUES (2002, 6002, 'Freshman', 'N', 'N', 'Would like to see extra work on sciences', 'N', 'Science', 7002); 
-	
-INSERT INTO stu
-  VALUES (2003, 6003, 'Sophmore', 'N', 'Y', 'Would like to see extra time spend on gym/excercise', 'N', 'Gym', 7003); 	
+  VALUES (101, 2001, 1011,  'Junior', 'Excellent', 'Y', 'Math', 'N');
 
 INSERT INTO stu
-  VALUES (2004, 6004, 'Senior', 'Y', 'N', ' ', 'Y', ' ', 7004); 
+  VALUES (102, 2002, 1012,  'Freshman', 'Average', 'N', 'Sciences', 'N');
 
 INSERT INTO stu
-  VALUES (2005, 6005, 'Freshman', 'N', 'N', 'Needs extra time with math', 'Y', 'Math', 7005);
+  VALUES (103, 2003, 1013,  'Sophmore', 'Okay', 'Y', 'Social Studies', 'N');
 
 INSERT INTO stu
-  VALUES (2006, 6006, 'Freshman', 'N', 'N', 'Would like to see extra time with science', 'N', 'Science', 7006);
-	
-INSERT INTO stu
-  VALUES (2007, 6007, 'Sophmore', 'N', 'Y', '', 'Y', ' ', 7007); 	
+  VALUES (104, 2004, 1014, 'Senior', 'Okay', 'N', 'Sciences ', 'Y');
 
 INSERT INTO stu
-  VALUES (2008, 6008, 'Junior', 'Y', 'N', 'Needs help with social studies', 'N', 'Social studies', 7008);
+  VALUES (105, 2005, 1015, 'Freshman', 'Average', 'N', 'Math', 'Y');
 
 INSERT INTO stu
-  VALUES (2009, 6009, 'Freshman', 'N', 'N', '', 'Y', 'Science', 7009);
-
-INSERT INTO stu
-  VALUES (2010, 6010, 'Senior', 'N', 'N', 'Needs help with nutrition education', 'Y', '', 7010);
+  VALUES (106, 2006, 1011, 'Freshman', 'Excellent', 'Y', 'Math', 'N');
 
 SELECT * FROM stu;	
 
@@ -659,22 +647,22 @@ SELECT * FROM inc;
 
 --ATTENDANCE TABLE (2001, attendance date, check in date, check out date)
 INSERT INTO att	
-	VALUES (2001, 28-APR-2018, 28-APR-2018, 30-APR-2018);
+	VALUES (2001, TO_DATE(('02-02-2018'), 'MM/DD/YYYY'), TO_DATE(('16:00'), 'HH24:MI'), TO_DATE(('18:00'),'HH24:MI'));
 	
 INSERT INTO att	
-	VALUES (2002, 17-MAR-2018, 10-MAR-2018, 30-APR-2018);	
+	VALUES (2002, TO_DATE(('02-13-2018'), 'MM/DD/YYYY'), TO_DATE(('16:00'), 'HH24:MI'), TO_DATE(('18:00'),'HH24:MI'));	
 
 INSERT INTO att	
-	VALUES (2003, 04-FEB-2018, 02-JAN-2018, 07-FEB-2018);
+	VALUES (2003, TO_DATE(('03-02-2018'), 'MM/DD/YYYY'), TO_DATE(('17:00'), 'HH24:MI'), TO_DATE(('19:00'),'HH24:MI'));
 	
 INSERT INTO att	
-	VALUES (2004, 28-OCT-2017, 14-OCT-2017, 30-OCT-2017);	
+	VALUES (2004, TO_DATE(('04-22-2018'), 'MM/DD/YYYY'), TO_DATE(('16:00'), 'HH24:MI'), TO_DATE(('18:00'),'HH24:MI'));	
 	
 INSERT INTO att	
-	VALUES (2005, 13-SEP-2017, 20-AUG-2016, 30-APR-2018);
+	VALUES (2005, TO_DATE(('05-02-2018'), 'MM/DD/YYYY'), TO_DATE(('14:00'), 'HH24:MI'), TO_DATE(('16:00'),'HH24:MI'));
 	
 INSERT INTO att	
-	VALUES (2006, 22-NOV-2018, 01-NOV-2016, 23-NOV-2017);						   
+	VALUES (2006, TO_DATE(('04-12-2018'), 'MM/DD/YYYY'), TO_DATE(('16:00'), 'HH24:MI'), TO_DATE(('18:00'),'HH24:MI'));						   
 
 SELECT * FROM att;  
 
