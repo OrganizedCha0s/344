@@ -889,3 +889,143 @@ INSERT INTO studoc
 	VALUES (2006, 3006); 
 	
 SELECT * FROM studoc;	
+
+--"?" means perID
+
+--Insert statements for Military Branch table
+INSERT INTO brn
+	VALUES(?, 'Navy');
+
+INSERT INTO brn
+	VALUES(?, 'Air Force');
+
+INSERT INTO brn
+	VALUES(?, 'Coast Guard');
+
+INSERT INTO brn
+	VALUES(?, 'Army');
+
+INSERT INTO brn
+	VALUES(?, 'Marine Corps');
+
+INSERT INTO brn
+	VALUES(?, 'Air Force');
+
+
+--INSERT statements for Ethnicity table
+
+INSERT INTO eth
+	VALUES(1239808547, 'Asian');
+
+INSERT INTO eth
+	VALUES(3940219345, 'Native American');
+
+INSERT INTO eth
+	VALUES(8392019403, 'Black');
+
+INSERT INTO eth
+	VALUES(1890345438, 'White');
+
+INSERT INTO eth
+	VALUES(6294014931, 'Pacific Islander');
+
+
+--Insert statements for Parent/Guardian Consent table
+INSERT INTO parguar
+	VALUES(?, Yes, ?);
+
+INSERT INTO parguar
+	VALUES(?, No, ?);
+
+INSERT INTO parguar
+	VALUES(?, Yes, ?);
+
+INSERT INTO parguar
+	VALUES(?, Yes, ?);
+
+INSERT INTO parguar
+	VALUES(?, No, ?);
+
+INSERT INTO parguar
+	VALUES(?, Yes, ?);
+
+
+--Insert statements for Special Instructions table
+INSERT INTO specinst
+	VALUES(?, 1400204019, 'Celexa', 2, 'Take 2 pills by mouth', TO_DATE('16:45', 'HH24:MI'), 'Depression');
+
+INSERT INTO specinst
+	VALUES(?, 1230989048, 'Xanax',  3, 'Take 3 pills by mouth', TO_DATE('10:00', 'HH24:MI'), 'Anxiety');
+
+INSERT INTO specinst
+	VALUES(?, 3593049013, 'Flovent', 2, 'Inhale two puffs', TO_DATE('14:00', 'HH24:MI'), 'Asthma');
+
+INSERT INTO specinst
+	VALUES(?, 5010584920, 'Humulin', 1, 'Inject one amount', TO_DATE('12:00', 'HH24:MI'), 'Diabetes');
+
+INSERT INTO specinst
+	VALUES(?, 8923498981, 'Oflaxin', 3, 'Put two drops into ear', TO_DATE('9:00', 'HH24:MI'), 'Ear Infection');
+
+INSERT INTO specinst
+	VALUES(?, 2406920194, 'Aldactone', 2, 'Take 2 pills by mouth', TO_DATE('15:00, 'HH24:MI'), 'Heart Disease');
+									       
+SELECT * FROM specinst;	
+									       
+--Insert statements for Medications table
+INSERT INTO med
+	VALUES(1400204019, 'Celexa');
+
+INSERT INTO med
+	VALUES(1230989048, 'Xanax');
+
+INSERT INTO med
+	VALUES(3593049013, 'Flovent');
+
+INSERT INTO med
+	VALUES(5010584920, 'Humulin');
+
+INSERT INTO med
+	VALUES(8923498981, 'Oflaxin');
+
+INSERT INTO med
+	VALUES(2406920194, 'Aldactone);
+
+SELECT * FROM med;	
+--Insert statement for Student Ethnicity table
+INSERT INTO stueth
+	VALUES(1890345438, ?);
+
+INSERT INTO stueth
+	VALUES(1890345438, ?);
+
+INSERT INTO stueth
+	VALUES(1890345438, ?);
+
+INSERT INTO stueth
+	VALUES(1890345438, ?);
+
+INSERT INTO stueth
+	VALUES(3940219345, ?);
+
+INSERT INTO stueth
+	VALUES(6294014931, ?);
+
+INSERT INTO stueth
+	VALUES(6294014931, ?);
+
+INSERT INTO stueth
+	VALUES(1239808547, ?);
+
+INSERT INTO stueth
+	VALUES(1239808547, ?); 
+
+INSERT INTO stueth
+	VALUES(1239808547, ?);
+
+INSERT INTO stueth
+	VALUES(8392019403, ?);
+
+INSERT INTO stueth
+	VALUES(8392019403, ?);
+
+SELECT * FROM stueth;	       
