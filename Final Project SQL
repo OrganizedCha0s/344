@@ -1,0 +1,394 @@
+-- Tables for IS 344 Project
+
+/* DROP STATEMENTS */
+DROP TABLE per CASCADE CONSTRAINTS;
+DROP TABLE dem CASCADE CONSTRAINTS;
+DROP TABLE email CASCADE CONSTRAINTS;
+DROP TABLE hos CASCADE CONSTRAINTS;
+DROP TABLE stu CASCADE CONSTRAINTS;
+DROP TABLE emg CASCADE CONSTRAINTS;
+DROP TABLE phn CASCADE CONSTRAINTS;
+DROP TABLE inc CASCADE CONSTRAINTS;
+DROP TABLE medinfo CASCADE CONSTRAINTS;
+DROP TABLE addr CASCADE CONSTRAINTS;
+DROP TABLE brn CASCADE CONSTRAINTS;
+DROP TABLE stdoc CASCADE CONSTRAINTS;
+DROP TABLE socdev CASCADE CONSTRAINTS;
+DROP TABLE stuserv CASCADE CONSTRAINTS;
+DROP TABLE pro CASCADE CONSTRAINTS; 
+DROP TABLE peraddr CASCADE CONSTRAINTS; 
+DROP TABLE mr CASCADE CONSTRAINTS; 
+DROP TABLE org CASCADE CONSTRAINTS; 
+DROP TABLE parguar CASCADE CONSTRAINTS;  
+DROP TABLE eth CASCADE CONSTRAINTS; 
+DROP TABLE plofemp CASCADE CONSTRAINTS; 
+DROP TABLE att CASCADE CONSTRAINTS; 
+DROP TABLE med CASCADE CONSTRAINTS; 
+DROP TABLE specinst CASCADE CONSTRAINTS; 
+DROP TABLE stueth CASCADE CONSTRAINTS;
+DROP TABLE specserv CASCADE CONSTRAINTS;
+DROP TABLE apprec CASCADE CONSTRAINTS;
+
+
+/* CREATE STATEMENTS */
+
+--PERSON TABLE
+
+CREATE TABLE per (
+	perID 		NUMBER (10),
+	perfname 	VARCHAR2 (35) NOT NULL,
+	perlname 	VARCHAR2 (35) NOT NULL,
+	permname 	VARCHAR2 (35),--NULLABLE BECAUSE SOME MIGHT NOT LIST A MIDDLE NAME. 
+
+CONSTRAINT per_perID_pk PRIMARY KEY(perID));
+  
+--DEMOGRAPHIC TABLE 
+ 
+CREATE TABLE dem (
+	stuID 		NUMBER (10),
+	demgen 		CHAR (1) NOT NULL, 
+	demdob  	DATE NOT NULL, 
+
+CONSTRAINT dem_stuID_pk PRIMARY KEY (stuID),
+CONSTRAINT dem_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID));
+
+--EMAIL TABLE 
+
+CREATE TABLE email (
+	emailID 	NUMBER (10),
+	perID 		Number (10),
+	emailus 	VARCHAR2 (20) NOT NULL,
+	emaildom 	VARCHAR2 (20)NOT NULL,
+  
+CONSTRAINT email_emailID_pk PRIMARY KEY (emailID, perID),
+CONSTRAINT perID_fk FOREIGN KEY (perID) REFERENCES per (perID));
+
+-- ORGANIZATION TABLE 
+                                                                
+CREATE TABLE org ( 
+	orgID 		NUMBER (10), 
+	orgname 	VARCHAR2 (35) NOT NULL,
+  
+CONSTRAINT org_orgID_pk PRIMARY KEY (orgID));
+
+  
+--PLACE OF EMPLOYMENT TABLE
+
+CREATE TABLE plofemp (
+	perID 		NUMBER (10),
+	orgID 		NUMBER (10), 
+
+CONSTRAINT plofemp_pk PRIMARY KEY(perID, orgID),
+CONSTRAINT plofemp_perID_fk FOREIGN KEY (perID) REFERENCES per(perID), 
+CONSTRAINT plofemp_orgID_fk FOREIGN KEY (orgID) REFERENCES org (orgID));
+
+-- HOSPITAL TABLE 
+
+CREATE TABLE hos (
+	stuID 		NUMBER (10),
+	orgID 		NUMBER (10),
+	hospref 	VARCHAR2 (1) NOT NULL, --PREFERENCE (P/S) 
+	hosphn 		NUMBER (10) NOT NULL,  
+
+CONSTRAINT hos_pk PRIMARY KEY (stuID, orgID),  
+CONSTRAINT hos_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT hos_orgID_fk FOREIGN KEY (orgID) REFERENCES org (orgID),
+CONSTRAINT hospref_cc CHECK ((hospref = 'P') OR (hospref = 'S')));
+
+-- MEMBERSHIP APPLICATION TABLE
+
+CREATE TABLE stu (
+	memID		NUMBER (10),
+	stuID 		NUMBER (10),
+	orgID 		NUMBER (10), 
+	stuyr 		VARCHAR2 (35) NOT NULL, --GRADE IN SCHOOL
+	stugradecomm 	VARCHAR2 (35) NOT NULL,
+	stugradesatis 	VARCHAR2 (1) NOT NULL, --Y/N
+	stuhomewrk 	VARCHAR2 (35) NOT NULL,  
+	stuservice 	VARCHAR2 (35) NOT NULL, --Y/N
+  
+CONSTRAINT stu_pk PRIMARY KEY (memID, stuID, orgID),
+CONSTRAINT stu_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT stu_orgID_fk FOREIGN KEY (orgID) REFERENCES org (orgID),
+CONSTRAINT stugradesatis_cc CHECK ((stugradesatis = 'Y') OR (stugradesatis = 'N')), 
+CONSTRAINT stuservice_cc CHECK ((stuservice = 'Y') OR (stuservice = 'N'))); 
+
+
+--ETHNICITY TABLE 
+                                                            
+CREATE TABLE eth( 
+  	ethID 		NUMBER (10), 
+	ethname		VARCHAR2 (35) NOT NULL, 
+
+CONSTRAINT eth_ethID_pk PRIMARY KEY (ethID)); 
+
+
+-- STUDENT_ETHNICITY TABLE 
+
+CREATE TABLE stueth ( 
+	ethID 		NUMBER (10), 
+	stuID 		NUMBER (10), 
+
+CONSTRAINT stueth_pk PRIMARY KEY (ethID, stuID), 
+CONSTRAINT stueth_ethID_fk FOREIGN KEY (ethID) REFERENCES eth (ethID), 
+CONSTRAINT stueth_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID)); 
+
+
+-- EMERGENCY CONTACT TABLE
+
+CREATE TABLE emg (
+	stuID 		NUMBER (10),
+	emgID 		NUMBER (10) NOT NULL,
+	relation 	VARCHAR2 (35) NOT NULL,--RELATION TO STUDENT
+	emgcall 	CHAR (1) NOT NULL, --CALL IN CASE OF EMERGENCY (Y/N)
+	authpick 	CHAR (1) NOT NULL, --AUTHORIZE PICK UP (Y/N)
+
+CONSTRAINT emg_pk PRIMARY KEY(stuID, emgID),
+CONSTRAINT emg_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT emg_emgID_fk FOREIGN KEY (emgID) REFERENCES per (perID),
+CONSTRAINT emgcall_cc CHECK ((emgcall = 'Y') OR (emgcall = 'N')),
+CONSTRAINT authpick_cc CHECK ((authpick = 'Y') OR (authpick = 'N')));
+  
+  
+-- PHONE TABLE  
+
+
+CREATE TABLE phn (
+	phnID 		NUMBER (10),
+	phntype 	VARCHAR2 (1) NOT NULL, -- PRIMARY OR SECONDARY 
+	phncntry 	NUMBER (1) NOT NULL,
+	phnarea 	NUMBER (3) NOT NULL,
+	phnexc 		NUMBER (7) NOT NULL,
+	perID 		NUMBER (10) NOT NULL, 
+
+CONSTRAINT phn_phnID_pk PRIMARY KEY(phnID),
+CONSTRAINT phn_perID_fk FOREIGN KEY (perID) REFERENCES per (perID),
+CONSTRAINT phntype_cc CHECK ((phntype = 'H') OR (phntype = 'C') OR (phntype = 'W')));
+
+
+-- SPECIAL SERVICES TABLE
+
+CREATE TABLE specserv (
+	servID		NUMBER (10),
+	specname	VARCHAR2 (35) NOT NULL, 
+	
+CONSTRAINT specserv_servID_pk PRIMARY KEY (servID));
+
+--STUDENT SPECIAL SERVICES TABLE 
+
+CREATE TABLE stuserv (
+	stuID 		NUMBER (10), 
+	servID		NUMBER (10),
+
+CONSTRAINT stuserv_pk PRIMARY KEY (stuID, servID), 
+CONSTRAINT stuserv_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID), 
+CONSTRAINT stuserv_servID_fk FOREIGN KEY (servID) REFERENCES specserv (servID)); 
+
+
+
+--INCOME TABLE 
+
+CREATE TABLE inc (
+	perID 		NUMBER (10),  
+	incfamsi 	NUMBER (10) NOT NULL,  --FAMILY SIZE
+	incinc 		NUMBER (10) NOT NULL, --   FAMILY INCOME
+	lunch		CHAR (1), -- FREE AND REDUCED LUNCH (Y/N)
+	incmili 	CHAR (1) NOT NULL,  --MILITARY STATUS (Y/N)
+  
+CONSTRAINT inc_pk PRIMARY KEY(perID),
+CONSTRAINT inc_perID_fk FOREIGN KEY (perID) REFERENCES per(perID),
+CONSTRAINT lunch_cc CHECK ((lunch = 'Y') OR (lunch = 'N')),  
+CONSTRAINT incmili_cc CHECK ((incmili = 'Y') OR (incmili = 'N')));
+  
+  
+--MEDICAL RECORD TABLE
+
+CREATE TABLE medinfo (
+	stuID 		NUMBER (10),
+	recID		NUMBER (10), 
+	medindate 	DATE, -- DATE OF LAST VISIT
+	medimupda 	CHAR (1), --IMMUNIZATION UPDATE (Y/N) 
+	medcouns  	CHAR (1), --COUNSELING (Y/N)
+  
+CONSTRAINT medinfo_pk PRIMARY KEY (stuID, recID),  
+CONSTRAINT medinfo_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT medimupda_cc CHECK ((medimupda = 'Y') OR (medimupda = 'N')),
+CONSTRAINT medcouns_cc CHECK ((medcouns = 'Y') OR (medcouns ='N')));  
+  
+  
+-- ADDRESS TABLE   
+
+CREATE TABLE addr (
+	addrID 		NUMBER (10),
+	addrstreet 	VARCHAR2 (35) NOT NULL,
+	addrcity 	VARCHAR2 (35) NOT NULL, 
+	addrst   	CHAR (2) NOT NULL,
+	addrzip 	NUMBER (5) NOT NULL,  
+  
+CONSTRAINT addr_addrID_pk PRIMARY KEY (addrID)); 
+ 
+                                       
+--PERSONAL ADDRESS TABLE 
+
+
+CREATE TABLE peraddr (                                       
+	perID 		NUMBER (10),                                       
+	addrID 		NUMBER (10),
+	addtype 	CHAR (1) NOT NULL, -- primary or secondary 
+CONSTRAINT peraddr_pk PRIMARY KEY (perID, addrID), 
+CONSTRAINT peraddr_perID_fk FOREIGN KEY (perID) REFERENCES per (perID), 
+CONSTRAINT peraddr_addrID_fk FOREIGN KEY (addrID) REFERENCES addr (addrID),
+CONSTRAINT addtype_cc CHECK ((addtype = 'P') OR (addtype = 'S')));
+
+
+
+--MILITARY BRANCH TABLE
+
+
+CREATE TABLE brn (
+	perID 		NUMBER (10),
+	brnname 	VARCHAR2(35) NOT NULL,
+  
+CONSTRAINT brn_perID_pk PRIMARY KEY (perID), 
+CONSTRAINT brn_perID_fk FOREIGN KEY (perID) REFERENCES per (perID)); 
+ 
+
+--STUDENT DOCTOR TABLE
+
+CREATE TABLE stdoc (
+	stuID 		NUMBER (10),
+	docID 		NUMBER (10),
+ 
+CONSTRAINT stdoc_pk PRIMARY KEY (stuID, docID),
+CONSTRAINT stdoc_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT stdoc_docID_fk FOREIGN KEY (docID) REFERENCES per (perID));
+
+  
+--SOCIAL DEVELOPMENT TABLE 
+
+CREATE TABLE socdev (
+	socdevID 	NUMBER (10),
+	socname 	VARCHAR2 (35) NOT NULL, 
+
+CONSTRAINT socdev_socdevID_pk PRIMARY KEY (socdevID));
+
+
+--PROBLEM TABLE
+
+CREATE TABLE pro (
+	socdevID	NUMBER (10),
+	stuID 		NUMBER (10)  NOT NULL,
+	prospec 	VARCHAR2 (35) NOT NULL, 
+	probdate 	DATE NOT NULL, 
+  
+CONSTRAINT pro_pk PRIMARY KEY (socdevID),
+CONSTRAINT pro_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT pro_socdevID_fk FOREIGN KEY (socdevID) REFERENCES socdev (socdevID));
+  
+--MEMBERSHIP RELEASE FORM TABLE
+
+CREATE TABLE mr (
+	stuID 		NUMBER (10),
+	mrdatsig 	DATE NOT NULL,     --DATE SIGNED
+	mrliab 		CHAR (1) NOT NULL, --LIABILITY Y/N
+	mrtrans 	CHAR (1) NOT NULL, --TRANSPORTATION
+	mrpho 		CHAR (1) NOT NULL, --PHOTO/VIDEO Y/N
+	mracadem 	CHAR (1) NOT NULL, -- ACADEMIC INFO RELEASE Y/N
+	mrcomp 		CHAR (1) NOT NULL, -- COMPUTER USE Y/N   
+	mrauthl 	CHAR (1) NOT NULL, -- AUTHORIZED TO LEAVE Y/N
+	mrmemsig 	CHAR (1) NOT NULL, -- MEMBER SIGNATURE Y/N
+	mrparsig 	CHAR (1) NOT NULL, --PARENT SIGNATURE Y/N
+	mrelect 	CHAR (1) NOT NULL, -- ELECTRONICS Y/N
+  
+CONSTRAINT mr_pk PRIMARY KEY (stuID),
+CONSTRAINT mr_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT mrliab_cc CHECK ((mrliab = 'Y') OR (mrliab = 'N')),  
+CONSTRAINT mrtrans_cc CHECK ((mrtrans= 'Y') OR (mrtrans = 'N')),
+CONSTRAINT mrpho_cc CHECK ((mrpho = 'Y') OR (mrpho = 'N')),
+CONSTRAINT mracadem_cc CHECK ((mracadem = 'Y') OR (mracadem = 'N')),
+CONSTRAINT mrcomp_cc CHECK ((mrcomp = 'Y') OR (mrcomp = 'N')),
+CONSTRAINT mrauthl_cc CHECK ((mrauthl = 'Y') OR (mrauthl = 'N')), 
+CONSTRAINT mrmemsig_cc CHECK ((mrmemsig = 'Y') OR (mrmemsig = 'N')),
+CONSTRAINT mrparsig_cc CHECK ((mrparsig = 'Y') OR (mrparsig = 'N')),
+CONSTRAINT mrelect_cc CHECK ((mrelect  = 'Y') OR (mrelect  = 'N')));
+
+
+-- Application Record 
+
+
+CREATE TABLE apprec ( 
+	appID 		NUMBER (10), 
+	empID 		NUMBER (10), 
+	stuID		NUMBER (10), 
+	memstat		VARCHAR2 (5) NOT NULL,  --CHECK THIS MEMBER STATUS (GUEST, NEW, RENEW)  
+	paymeth		VARCHAR2 (35) NOT NULL, -- PAYMENT METHOD (PAID, CASH, CHECK, MO, SCHOLARSHIP)
+	payamou		NUMBER (10) NOT NULL, 
+	recdate 	DATE NOT NULL, -- DATE RECEIVED
+	entdate 	DATE NOT NULL, -- DATE ENTERED 
+ 	orida 		DATE NOT NULL, --ORIENTATION DATE
+	oriti 		DATE NOT NULL, --ORIENTATION TIME
+	oricom 		CHAR (1) NOT NULL, --ORIENTATION COMPLETE (Y/N)
+
+CONSTRAINT apprec_pk PRIMARY KEY (appID, empID, stuID), 
+CONSTRAINT apprecd_empID_fk FOREIGN KEY (empID) REFERENCES per (perID), 
+CONSTRAINT apprec_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID), 
+CONSTRAINT memstat_cc CHECK ((memstat = 'Guest') OR (memstat = 'New') OR (memstat = 'Renew')), 
+CONSTRAINT oricom_cc CHECK ((oricom = 'Y') OR (oricom = 'N')));
+
+                                                               
+                                                                
+--ATTENDANCE TABLE 
+
+CREATE TABLE att (
+	stuID 		NUMBER (10),
+	attdate 	DATE NOT NULL, 
+	attchkin 	DATE NOT NULL, 
+	attchko 	DATE NOT NULL, 
+  
+CONSTRAINT att_stuID_pk PRIMARY KEY (stuID),  
+CONSTRAINT att_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID)); 
+
+
+--MEDICATION TABLE
+
+CREATE TABLE med (
+	medID 		NUMBER (10),
+	medname		VARCHAR (35), 
+	hosname VARCHAR2 (10)NOT NULL, --name
+	medamt NUMBER (10) NOT NULL, --amount 
+	meddir VARCHAR2 (35) NOT NULL, --HOW TO TAKE (MOUTH, EYE DROPS, EAR, ON SKIN, ETC)
+	medti DATE NOT NULL, -- TIME/S OF DAY
+	medre VARCHAR2 (35) NOT NULL, -- REASON
+  
+CONSTRAINT med_medID_pk PRIMARY KEY (medID)); 
+
+
+--SPECIAL INSTRUCTIONS TABLE
+
+
+CREATE TABLE specinst (
+	stuID 		NUMBER (10),
+	medID 		NUMBER (10),
+	meddesc 	VARCHAR (35) NOT NULL, 
+	medamt 		NUMBER (10) NOT NULL,   --amount 
+	meddir 		VARCHAR2 (35) DEFAULT 'None' NOT NULL, 
+ 	medti 		DATE NOT NULL,  -- TIME/S OF DAY
+	medre 		VARCHAR2 (35) NOT NULL,   -- REASONf
+ 
+CONSTRAINT specinst_pk PRIMARY KEY (stuID, medID),  
+CONSTRAINT specinst_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
+CONSTRAINT specinst_medID_fk FOREIGN KEY (medID) REFERENCES med (medID));
+
+                               
+
+ -- PARENT/GUARDIAN CONSENT FORM TABLE 
+                                                            
+CREATE TABLE parguar ( 
+   	stuID 		NUMBER (10), 
+   	sign  		VARCHAR2 (35) NOT NULL, --Parent/Guardian signature (Y/N)
+   	parID 		NUMBER (10) NOT NULL, 
+   
+CONSTRAINT parguar_stuID_pk PRIMARY KEY (stuID), 
+CONSTRAINT parguar_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID), 
+CONSTRAINT parguar_parID_fk FOREIGN KEY (parID) REFERENCES per (perID),
+CONSTRAINT sign_cc CHECK ((sign = 'Y') OR (sign = 'N')));
