@@ -697,6 +697,21 @@ INSERT INTO org
 
 INSERT INTO org 
 	VALUES (1010, 'HSHS St. Joseph''s Hospital');
+	
+INSERT INTO org 
+	VALUES (1011, 'Memorial High School');
+
+INSERT INTO org 
+	VALUES (1012, 'Manz Elementary School'); 
+
+INSERT INTO org 
+	VALUES (1013, 'Flynn Elementary School');
+
+INSERT INTO org
+	VALUES (1014, 'Southview Elementary School');
+
+INSERT INTO org 
+	VALUES (1015, 'Parkview Elementary School'); 	
 
 SELECT * FROM org;	
 
@@ -752,10 +767,31 @@ INSERT INTO plofemp
 
 INSERT INTO plofemp 
 	VALUES (3005, 1010);
+	
+INSERT INTO plofemp 
+	VALUES (?, '1011);
+
+INSERT INTO plofemp 
+	VALUES (?, '1012);
+
+INSERT INTO plofemp 
+	VALUES (?, '1012);
+
+INSERT INTO plofemp 
+	VALUES (?, '1013);
+
+INSERT INTO plofemp 
+	VALUES (?, '1014);
+
+INSERT INTO plofemp 
+	VALUES (?, '1014);
+
+INSERT INTO plofemp 
+	VALUES (?, '1015);	
 
 SELECT * FROM plofemp;
 
-/* Script to populate the Hospital table */
+--Script to populate the Hospital table
 
 INSERT INTO hos 
 	VALUES (2001, 1004, 'P', 7156724211);
@@ -1028,4 +1064,6 @@ INSERT INTO stueth
 INSERT INTO stueth
 	VALUES(8392019403, ?);
 
-SELECT * FROM stueth;	       
+SELECT * FROM stueth;	  
+	       
+	       
