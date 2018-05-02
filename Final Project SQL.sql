@@ -459,6 +459,9 @@ INSERT INTO pers
 
 INSERT INTO pers 
   VALUES (5021, 'Eli', '','Manning');
+  
+SELECT * FROM pers;
+
 --DEMOGRAPHIC 
 
 INSERT INTO dem
@@ -492,7 +495,9 @@ INSERT INTO dem
   VALUES (2010, 'F', 21-JUL-1992);
 	
 INSERT INTO dem
-  VALUES (2011, 'F', 10-APR-1994);	
+  VALUES (2011, 'F', 10-APR-1994);
+  
+SELECT * FROM dem  
   
 --EMAIL  
 INSERT INTO email
@@ -518,6 +523,8 @@ INSERT INTO email
   
 INSERT INTO email
   VALUES ('jake@uwec.edu', 'jake', 'uwec.edu')   --
+  
+SELECT * FROM email;
   
 --PHONE DO WE NEED TO ADD PERSON ID?? 
 
@@ -545,7 +552,7 @@ INSERT INTO phn
 INSERT INTO phn
   VALUES ('10008', 'C', '1', '715', 7785656) 
   
-  
+  SELECT * FROM phn
 --ADDRESS
 INSERT INTO addr
   VALUES (5001, 'Niagara', 'Eau Claire', 54703);
@@ -571,6 +578,8 @@ INSERT INTO addr
 INSERT INTO addr
   VALUES (5008, 'University', 'Eau Claire', 54701);
    
+SELECT * FROM addr
+
 --HOSPITAL
 
 INSERT INTO hos 
@@ -607,7 +616,7 @@ INSERT INTO stu
 INSERT INTO stu
   VALUES (2010, 6010, 'Senior', 'N', 'N', 'Needs help with nutrition education', 'Y', '', 7010);
 
-	
+SELECT * FROM stu;	
 
 --INSERT EMERGENCY CONTACT
 INSERT INTO emg
@@ -630,6 +639,8 @@ INSERT INTO emg
 
 INSERT INTO emg
 	VALUES (1016, 5007, Wife, 'Y', 'Y', 'N');
+
+SELECT * FROM emg
 
 --Income Table --FIX ID
 INSERT INTO inc 
@@ -656,7 +667,8 @@ VALUES ( ?,5, 90000, N,  Foster Parent);
 INSERT INTO inc 
 VALUES ( ?,7, 100000, N,  Relative);
 
-	
+SELECT * FROM inc;
+
 --ATTENDANCE TABLE (2001, attendance date, check in date, check out date)
 INSERT INTO att	
 	VALUES (2001, 28-APR-2018, 28-APR-2018, 30-APR-2018);
@@ -675,3 +687,5 @@ INSERT INTO att
 	
 INSERT INTO att	
 	VALUES (2006, 22-NOV-2018, 01-NOV-2016, 23-NOV-2017);						   
+
+SELECT * FROM att;  
