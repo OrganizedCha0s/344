@@ -641,30 +641,19 @@ INSERT INTO emg
 
 SELECT * FROM emg
 
---Income Table --FIX ID
+--Insert Statements for Income Table /* Insert statements for Income. */ 
 INSERT INTO inc 
-VALUES ( ?,5, 59000, N, father);
-
+	VALUES ( 2001,4, 69000, 'Y', 'N'); 
 INSERT INTO inc 
-VALUES ( ?,4, 69000, Y, father);
-
+	VALUES ( 2002,6, 240000, 'N', 'N'); 
 INSERT INTO inc 
-VALUES ( ?,6, 120000, N,  Both Parents);
-
+	VALUES ( 2003,2, 100000, 'N', 'N'); 
 INSERT INTO inc 
-VALUES ( ?,2, 88000, N, Mother);
-
+	VALUES ( 2004,3, 120000, 'N', 'Y'); 
 INSERT INTO inc 
-VALUES ( ?,3, 70000, N,  Guardian);
-
+	VALUES ( 2005,2, 30000, 'Y', 'Y'); 
 INSERT INTO inc 
-VALUES ( ?,2, 30000, N,  Grandparent);
-
-INSERT INTO inc 
-VALUES ( ?,5, 90000, N,  Foster Parent);
-
-INSERT INTO inc 
-VALUES ( ?,7, 100000, N,  Relative);
+	VALUES ( 2006,5, 150000, 'N', 'Y'); 
 
 SELECT * FROM inc;
 
