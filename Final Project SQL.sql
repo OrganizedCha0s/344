@@ -55,14 +55,14 @@ CONSTRAINT dem_cc CHECK ((demgen = 'M') OR (demgen = 'F')) ); --DEMOGRAPHIC
 
 --EMAIL TABLE 
 
-CREATE TABLE email (
-	emailID 	NUMBER (10),
-	perID 		Number (10),
-	emailus 	VARCHAR2 (20) NOT NULL,
-	emaildom 	VARCHAR2 (20)NOT NULL,
-  
-CONSTRAINT email_emailID_pk PRIMARY KEY (emailID, perID),
-CONSTRAINT perID_fk FOREIGN KEY (perID) REFERENCES per (perID));
+CREATE TABLE email ( 
+emailID NUMBER (10), 
+perID Number (10), 
+emailus VARCHAR2 (35) NOT NULL, 
+emaildom VARCHAR2 (35)NOT NULL,
+	
+CONSTRAINT email_emailID_pk PRIMARY KEY (emailID, perID), 
+CONSTRAINT perID_fk FOREIGN KEY (perID) REFERENCES per (perID)); 
 
 -- ORGANIZATION TABLE 
                                                                 
@@ -473,29 +473,18 @@ INSERT INTO dem
 SELECT * FROM dem  
   
 --EMAIL  
-INSERT INTO email
-  VALUES ('WETZELNJ5708@uwec.edu', 'WETZELNJ5708', 'uwec.edu')
-  
-INSERT INTO email
-  VALUES ('jordan@uwec.edu', 'j', 'uwec.edu') --
-  
-INSERT INTO email
-  VALUES ('ianwtz@gmail.com', 'ianwtz', 'gmail.com')
-  
-INSERT INTO email
-  VALUES ('LORENTJA6352@uwec.edu', 'LORENTJA6352', 'uwec.edu')  
-  
-INSERT INTO email
-  VALUES ('rachel@uwec.edu', 'r', 'uwec.edu')     --
-  
-INSERT INTO email
-  VALUES ('erin123@gmail.com', 'erin123', 'gmail.com')
-  
-INSERT INTO email
-  VALUES ('sunny@uwec.edu', 's', 'uwec.edu')
-  
-INSERT INTO email
-  VALUES ('jake@uwec.edu', 'jake', 'uwec.edu')   --
+INSERT INTO email 
+	VALUES (001, 2001, 'sam5708', 'uwec.edu'); 
+INSERT INTO email 
+	VALUES (002, 2002, 'bronco3400', 'uwec.edu'); 
+INSERT INTO email 
+	VALUES (003, 2003, 'clark1123', 'gmail.com'); 
+INSERT INTO email 
+	VALUES (004, 2004, 'LORENTJA6352', 'uwec.edu'); 
+INSERT INTO email 
+	VALUES (005, 2005, 'ghosh2345', 'uwec.edu' ); 
+INSERT INTO email 
+	VALUES (006, 2006, 'reilyj0915', 'gmail.com');
   
 SELECT * FROM email;
   
