@@ -690,7 +690,6 @@ INSERT INTO att
 
 SELECT * FROM att;  
 
-
 /* Script to populate the organization table */
 
 INSERT INTO org 
@@ -721,74 +720,90 @@ INSERT INTO org
 	VALUES (1009, 'Sacred Heart Hospital');
 
 INSERT INTO org 
-	VALUES (1010, 'HSHS St. Joseph's Hospital');
+	VALUES (1010, 'HSHS St. Joseph''s Hospital');
 
+SELECT * FROM org;	
 
-
--- Script to populate place of employment table 
-
-INSERT INTO plofemp 
-	VALUES (?, '1001'); 
+/* Script to populate place of employment table */ 
 
 INSERT INTO plofemp 
-	VALUES (?, '1002'); 
+	VALUES (1001, 1001); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1003'); 
+	VALUES (1000, 1002); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1004'); 
+	VALUES (1003, 1003); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1004'); 
+	VALUES (1008, 1003); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1005'); 
+	VALUES (1009, 1003); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1006'); 
+	VALUES (1004, 1004); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1007'); 
+	VALUES (3001, 1004); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1008'); 
+	VALUES (1005, 1005); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1009'); 
+	VALUES (1006, 1006); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1009'); 
+	VALUES (1007, 1007); 
 
 INSERT INTO plofemp 
-	VALUES (?, '1010);
+	VALUES (3002, 1008); 
+
+INSERT INTO plofemp 
+	VALUES (3003, 1009); 
+
+INSERT INTO plofemp 
+	VALUES (1010, 1009); 
+
+INSERT INTO plofemp 
+	VALUES (1011, 1009); 
+
+INSERT INTO plofemp 
+	VALUES (1012, 1009); 
+
+INSERT INTO plofemp 
+	VALUES (3004, 1009); 
+
+INSERT INTO plofemp 
+	VALUES (3005, 1010);
 
 SELECT * FROM plofemp;
+
 /* Script to populate the Hospital table */
 
 INSERT INTO hos 
-	VALUES (?, 1004, 'P', 7156724211);
+	VALUES (2001, 1004, 'P', 7156724211);
 
 INSERT INTO hos 
-	VALUES (?, 1004, 'P', 7156724211);
+	VALUES (2002, 1004, 'P', 7156724211);
 
 INSERT INTO hos 
-	VALUES (?, 1008, 'P', 7158385222);
+	VALUES (2003, 1008, 'P', 7158385222);
 
 INSERT INTO hos 
-	VALUES (?, 1009, 'P', 7157174121);
+	VALUES (2004, 1009, 'P', 7157174121);
 
 INSERT INTO hos 
-	VALUES (?, 1010, 'P', 7157231811);
+	VALUES (2005, 1010, 'P', 7157231811);
 
 INSERT INTO hos 
-	VALUES (?, 1009, 'P', 7157174121);
+	VALUES (2006, 1009, 'P', 7157174121);
 
 INSERT INTO hos 
-	VALUES (?, 1008, 'S', 7158385222); --do we even need secondary? members only list one preffered hospital
+	VALUES (2001, 1008, 'S', 7158385222); --do we even need secondary? members only list one preffered hospital
 
 INSERT INTO hos 
-	VALUES (?, 1010, 'S', 7157231811);
+	VALUES (2002, 1010, 'S', 7157231811);
 
 SELECT * FROM hos;
 
@@ -817,30 +832,30 @@ SELECT * FROM specserv;
 /* Script to populate Student Special Services Table */
 
 INSERT INTO stuserv 
-	VALUES (?, 2100); 
+	VALUES (2002, 2100); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2101); 
+	VALUES (2003, 2101); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2104); 
+	VALUES (2002, 2104); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2102); 
+	VALUES (2003, 2102); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2103); 
+	VALUES (2002, 2103); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2105); 
+	VALUES (2002, 2105); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2104); 
+	VALUES (2006, 2104); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2102); 
+	VALUES (2006, 2102); 
 
 INSERT INTO stuserv 
-	VALUES (?, 2102); 
-	
+	VALUES (2001, 2102); 
+
 SELECT * FROM stuserv;	
