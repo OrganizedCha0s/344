@@ -59,7 +59,7 @@ CONSTRAINT dem_cc CHECK ((demgen = 'M') OR (demgen = 'F')) ); --DEMOGRAPHIC
 
 CREATE TABLE email ( 
 emailID NUMBER (10), 
-perID Number (10), 
+perID NUMBER (10), 
 emailus VARCHAR2 (35) NOT NULL, 
 emaildom VARCHAR2 (35)NOT NULL,
 	
@@ -90,13 +90,11 @@ CONSTRAINT plofemp_orgID_fk FOREIGN KEY (orgID) REFERENCES org (orgID));
 CREATE TABLE hos (
 	stuID 		NUMBER (10),
 	orgID 		NUMBER (10),
-	hospref 	VARCHAR2 (1) NOT NULL, --PREFERENCE (P/S) 
 	hosphn 		NUMBER (10) NOT NULL,  
 
 CONSTRAINT hos_pk PRIMARY KEY (stuID, orgID),  
 CONSTRAINT hos_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
-CONSTRAINT hos_orgID_fk FOREIGN KEY (orgID) REFERENCES org (orgID),
-CONSTRAINT hospref_cc CHECK ((hospref = 'P') OR (hospref = 'S')));
+CONSTRAINT hos_orgID_fk FOREIGN KEY (orgID) REFERENCES org (orgID));
 
 -- MEMBERSHIP APPLICATION TABLE
 
@@ -189,12 +187,13 @@ CONSTRAINT stuserv_servID_fk FOREIGN KEY (servID) REFERENCES specserv (servID));
 
 --INCOME TABLE 
 
-INCOME TABLE CREATE TABLE inc ( 
-perID NUMBER (10), 
-incfamsi NUMBER (10) NOT NULL, --FAMILY SIZE 
-incinc NUMBER (10) NOT NULL, -- FAMILY INCOME 
-lunch CHAR (1), -- FREE AND REDUCED LUNCH (Y/N) 
-incmili CHAR (1) NOT NULL, --MILITARY STATUS (Y/N) 
+CREATE TABLE inc ( 
+	perID NUMBER (10), 
+	incfamsi NUMBER (10) NOT NULL, --FAMILY SIZE 
+	incinc NUMBER (10) NOT NULL, -- FAMILY INCOME 
+	lunch CHAR (1), -- FREE AND REDUCED LUNCH (Y/N) 
+	incmili CHAR (1) NOT NULL, --MILITARY STATUS (Y/N) 
+
 CONSTRAINT inc_pk PRIMARY KEY(perID), 
 CONSTRAINT inc_perID_fk FOREIGN KEY (perID) REFERENCES per(perID), 
 CONSTRAINT lunch_cc CHECK ((lunch = 'Y') OR (lunch = 'N')), 
@@ -234,6 +233,7 @@ CREATE TABLE peraddr (
 perID NUMBER (10), 
 addrID NUMBER (10), 
 addtype CHAR (1) NOT NULL, -- primary or secondary 
+	
 CONSTRAINT peraddr_pk PRIMARY KEY (perID, addrID), 
 CONSTRAINT peraddr_perID_fk FOREIGN KEY (perID) REFERENCES per (perID), 
 CONSTRAINT peraddr_addrID_fk FOREIGN KEY (addrID) REFERENCES addr (addrID), 
@@ -255,6 +255,7 @@ CONSTRAINT brn_perID_fk FOREIGN KEY (perID) REFERENCES per (perID));
 CREATE TABLE stdoc ( 
 stuID NUMBER (10), 
 docID NUMBER (10), 
+	
 CONSTRAINT stdoc_pk PRIMARY KEY (stuID, docID), 
 CONSTRAINT stdoc_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID), 
 CONSTRAINT stdoc_docID_fk FOREIGN KEY (docID) REFERENCES per (perID)); 
@@ -281,8 +282,8 @@ CONSTRAINT pro_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
 CONSTRAINT pro_socdevID_fk FOREIGN KEY (socdevID) REFERENCES socdev (socdevID));
   
 --MEMBERSHIP RELEASE FORM TABLE
-
 CREATE TABLE mr (
+  relid     NUMBER (10),
 	stuID 		NUMBER (10),
 	mrdatsig 	DATE NOT NULL,     --DATE SIGNED
 	mrliab 		CHAR (1) NOT NULL, --LIABILITY Y/N
@@ -294,8 +295,13 @@ CREATE TABLE mr (
 	mrmemsig 	CHAR (1) NOT NULL, -- MEMBER SIGNATURE Y/N
 	mrparsig 	CHAR (1) NOT NULL, --PARENT SIGNATURE Y/N
 	mrelect 	CHAR (1) NOT NULL, -- ELECTRONICS Y/N
+  	medindate 	DATE, -- DATE OF LAST VISIT
+	medimupda 	CHAR (1), --IMMUNIZATION UPDATE (Y/N) 
+	medcouns  	CHAR (1), --COUNSELING (Y/N)
   
-CONSTRAINT mr_pk PRIMARY KEY (stuID),
+  
+CONSTRAINT mr_pk PRIMARY KEY (relid, stuID),
+CONSTRAINT mr_fk FOREIGN KEY (stuID) REFERENCES per (perID),
 CONSTRAINT mr_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
 CONSTRAINT mrliab_cc CHECK ((mrliab = 'Y') OR (mrliab = 'N')),  
 CONSTRAINT mrtrans_cc CHECK ((mrtrans= 'Y') OR (mrtrans = 'N')),
@@ -305,7 +311,9 @@ CONSTRAINT mrcomp_cc CHECK ((mrcomp = 'Y') OR (mrcomp = 'N')),
 CONSTRAINT mrauthl_cc CHECK ((mrauthl = 'Y') OR (mrauthl = 'N')), 
 CONSTRAINT mrmemsig_cc CHECK ((mrmemsig = 'Y') OR (mrmemsig = 'N')),
 CONSTRAINT mrparsig_cc CHECK ((mrparsig = 'Y') OR (mrparsig = 'N')),
-CONSTRAINT mrelect_cc CHECK ((mrelect  = 'Y') OR (mrelect  = 'N')));
+CONSTRAINT mrelect_cc CHECK ((mrelect  = 'Y') OR (mrelect  = 'N')),
+CONSTRAINT medimupda_cc CHECK ((medimupda = 'Y') OR (medimupda = 'N')),
+CONSTRAINT medcouns_cc CHECK ((medcouns = 'Y') OR (medcouns ='N')));
 
 
 -- Application Record 
@@ -357,9 +365,16 @@ CREATE TABLE med (
   
 CONSTRAINT med_medID_pk PRIMARY KEY (medID)); 
 
+--MEDICAL CONDITION TABLE
+CREATE TABLE medcond (
+  conID NUMBER (10),
+  stuID NUMBER (10),
+  connm VARCHAR2 (35),
+  
+CONSTRAINT medcond_pk PRIMARY KEY (conID, stuID),
+CONSTRAINT medcond_fk FOREIGN KEY (stuID) REFERENCES per (perID));
 
 --SPECIAL INSTRUCTIONS TABLE
-
 
 CREATE TABLE specinst (
 	stuID 		NUMBER (10),
@@ -368,13 +383,11 @@ CREATE TABLE specinst (
 	medamt 		NUMBER (10) NOT NULL,   --amount 
 	meddir 		VARCHAR2 (35) DEFAULT 'None' NOT NULL, 
  	medti 		DATE NOT NULL,  -- TIME/S OF DAY
-	medre 		VARCHAR2 (35) NOT NULL,   -- REASONf
+	medre 		VARCHAR2 (35) NOT NULL,   -- REASON
  
 CONSTRAINT specinst_pk PRIMARY KEY (stuID, medID),  
 CONSTRAINT specinst_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
 CONSTRAINT specinst_medID_fk FOREIGN KEY (medID) REFERENCES med (medID));
-
-                               
 
  -- PARENT/GUARDIAN CONSENT FORM TABLE 
                                                             
