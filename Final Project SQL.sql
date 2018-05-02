@@ -148,10 +148,8 @@ CONSTRAINT emg_stuID_fk FOREIGN KEY (stuID) REFERENCES per (perID),
 CONSTRAINT emg_emgID_fk FOREIGN KEY (emgID) REFERENCES per (perID),
 CONSTRAINT emgcall_cc CHECK ((emgcall = 'Y') OR (emgcall = 'N')),
 CONSTRAINT authpick_cc CHECK ((authpick = 'Y') OR (authpick = 'N')));
-  
-  
+    
 -- PHONE TABLE  
-
 
 CREATE TABLE phn (
 	phnID 		NUMBER (10),
@@ -229,17 +227,14 @@ CONSTRAINT addr_addrID_pk PRIMARY KEY (addrID));
                                        
 --PERSONAL ADDRESS TABLE 
 
-
-CREATE TABLE peraddr (                                       
-	perID 		NUMBER (10),                                       
-	addrID 		NUMBER (10),
-	addtype 	CHAR (1) NOT NULL, -- primary or secondary 
+CREATE TABLE peraddr ( 
+perID NUMBER (10), 
+addrID NUMBER (10), 
+addtype CHAR (1) NOT NULL, -- primary or secondary 
 CONSTRAINT peraddr_pk PRIMARY KEY (perID, addrID), 
 CONSTRAINT peraddr_perID_fk FOREIGN KEY (perID) REFERENCES per (perID), 
-CONSTRAINT peraddr_addrID_fk FOREIGN KEY (addrID) REFERENCES addr (addrID),
-CONSTRAINT addtype_cc CHECK ((addtype = 'P') OR (addtype = 'S')));
-
-
+CONSTRAINT peraddr_addrID_fk FOREIGN KEY (addrID) REFERENCES addr (addrID), 
+CONSTRAINT addtype_cc CHECK ((addtype = 'P') OR (addtype = 'S'))); 
 
 --MILITARY BRANCH TABLE
 
@@ -848,7 +843,41 @@ INSERT INTO stuserv
 
 SELECT * FROM stuserv;	
 
-
-
+------------Inserts for peraddr table 
+INSERT INTO peraddr 
+	VALUES (2001, 5002, 'P'); 
+	
+INSERT INTO peraddr 
+	VALUES (2001, 5011, 'S'); 
+	
+INSERT INTO peraddr
+	VALUES (2002, 5003, 'P'); 
+	
+INSERT INTO peraddr 
+	VALUES (2002, 5012, 'S'); 
+	
+INSERT INTO peraddr 
+	VALUES (2003, 5004, 'P'); 
+	
+INSERT INTO peraddr 
+	VALUES (2003, 5013, 'S'); 
+	
+INSERT INTO peraddr 
+	VALUES (2004, 5005, 'P'); 
+	
+INSERT INTO peraddr 
+	VALUES (2004, 5014, 'S'); 
+	
+INSERT INTO peraddr 
+	VALUES (2005, 5005, 'P'); 
+	
+INSERT INTO peraddr 
+	VALUES (2005, 5015, 'S'); 
+	
+INSERT INTO peraddr 
+	VALUES (2006, 5006, 'P'); 
+	
+INSERT INTO peraddr 
+	VALUES (2006, 5016, 'S'); 
 
 
