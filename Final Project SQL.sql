@@ -571,11 +571,6 @@ INSERT INTO addr
   VALUES (5008, 'University', 'Eau Claire', 54701);
    
 SELECT * FROM addr
-
---HOSPITAL
-
-INSERT INTO hos 
-  VALUES (stuID, hosID, hosname, hosprimary?, hosphn)
   
 --STUDENT (stuID,stuorgID, student year inschool jun sen, student lunch y/n, student retained, stu grade comments, stu grades sat?, stu homework,stuservID)
 INSERT INTO stu
@@ -877,5 +872,20 @@ INSERT INTO peraddr
 	
 INSERT INTO peraddr 
 	VALUES (2006, 5016, 'S'); 
-
-
+	
+SELECT * FROM peraddr;
+---Inserts for Student Doctor Table 
+INSERT INTO studoc
+	VALUES (2001, 3001); 
+INSERT INTO studoc 
+	VALUES (2002, 3002); 
+INSERT INTO studoc 
+	VALUES (2003, 3003); 
+INSERT INTO studoc 
+	VALUES (2004, 3004); 
+INSERT INTO studoc 
+	VALUES (2005, 3005); 
+INSERT INTO studoc 
+	VALUES (2006, 3006); 
+	
+SELECT * FROM studoc;	
