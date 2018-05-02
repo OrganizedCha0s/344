@@ -782,25 +782,25 @@ INSERT INTO plofemp
 	VALUES (3005, 1010);
 	
 INSERT INTO plofemp 
-	VALUES (?, '1011);
+	VALUES (?, 1011);
 
 INSERT INTO plofemp 
-	VALUES (?, '1012);
+	VALUES (?, 1012);
 
 INSERT INTO plofemp 
-	VALUES (?, '1012);
+	VALUES (?, 1013);
 
 INSERT INTO plofemp 
-	VALUES (?, '1013);
+	VALUES (?, 1014);
 
 INSERT INTO plofemp 
-	VALUES (?, '1014);
+	VALUES (?, 1015);
 
 INSERT INTO plofemp 
-	VALUES (?, '1014);
+	VALUES (?, 1016);
 
 INSERT INTO plofemp 
-	VALUES (?, '1015);	
+	VALUES (?, 1017);	
 
 SELECT * FROM plofemp;
 
@@ -1016,7 +1016,7 @@ INSERT INTO specinst
 	VALUES(?, 8923498981, 'Oflaxin', 3, 'Put two drops into ear', TO_DATE('9:00', 'HH24:MI'), 'Ear Infection');
 
 INSERT INTO specinst
-	VALUES(?, 2406920194, 'Aldactone', 2, 'Take 2 pills by mouth', TO_DATE('15:00, 'HH24:MI'), 'Heart Disease');
+	VALUES(?, 2406920194, 'Aldactone', 2, 'Take 2 pills by mouth', TO_DATE('15:00', 'HH24:MI'), 'Heart Disease');
 									       
 SELECT * FROM specinst;	
 									       
@@ -1037,7 +1037,7 @@ INSERT INTO med
 	VALUES(8923498981, 'Oflaxin');
 
 INSERT INTO med
-	VALUES(2406920194, 'Aldactone);
+	VALUES(2406920194, 'Aldactone');
 
 SELECT * FROM med;	
 --Insert statement for Student Ethnicity table
